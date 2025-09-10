@@ -1,16 +1,10 @@
-pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/eragattapuganesh/Tour-Project.git'
-            }
-        }
-        stage('Build and Deploy') {
-            steps {
-                sh 'docker-compose down || true'
-                sh 'docker-compose up -d --build'
-            }
-        }
-    }
-}
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: tour_project
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
