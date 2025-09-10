@@ -5,6 +5,6 @@ services:
     build: .
     container_name: tour_project
     ports:
-      - "8080:80"
+      - "8181:81"
     volumes:
       - .:/var/www/html
