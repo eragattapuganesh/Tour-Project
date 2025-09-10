@@ -4,19 +4,11 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/sandeepvilla1612/Tour-Project.git'
+                git branch: 'main', url: 'https://github.com/eragattapuganesh/Tour-Project.git'
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'docker build -t tour-project .'
-                }
-            }
-        }
-
-        stage('Deploy with Docker Compose') {
+        stage('Build and Deploy') {
             steps {
                 script {
                     sh 'docker-compose down || true'
