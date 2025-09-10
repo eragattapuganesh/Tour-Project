@@ -1,9 +1,16 @@
-version: "3.8"
-services:
-  tour-project:
-    build: .
-    container_name: tour-project
-    ports:
-      - "8081:80"
-    volumes:
-      - .:/var/www/html
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/eragattapuganesh/Tour-Project.git'
+            }
+        }
+        stage('Build and Deploy') {
+            steps {
+                sh 'docker-compose down || true'
+                sh 'docker-compose up -d --build'
+            }
+        }
+    }
+}
